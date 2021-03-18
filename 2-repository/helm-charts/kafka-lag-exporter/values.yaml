@@ -1,0 +1,140 @@
+## Statically define one or more cluster
+clusters: {}
+## Ex)
+#clusters:
+#  - name: "default"
+#    bootstrapBrokers: "simple-strimzi-kafka-bootstrap.strimzi.svc.cluster.local:9092"
+#    topicWhitelist:
+#    - "^xyz-corp-topics\..+"
+#    topicBlacklist:
+#    - "^unmonitored-topics-.+"
+#    groupWhitelist:
+#    - "^analytics-app-.+"
+#    # Properties defined by org.apache.kafka.clients.consumer.ConsumerConfig
+#    # can be defined in this configuration section.
+#    # https://kafka.apache.org/documentation/#consumerconfigs
+#    consumerProperties:
+#      security.protocol: SSL
+#      ssl.truststore.location: /path/to/my.truststore.jks
+#      ssl.trustore.password: mypwd
+#    # https://kafka.apache.org/documentation/#adminclientconfigs
+#    adminClientProperties:
+#      security.protocol: SSL
+#      ssl.truststore.location: /path/to/my.truststore.jks
+#      ssl.trustore.password: mypwd
+#    labels:
+#      location: ny
+#      zone: "us-east"
+
+## The interval between refreshing metrics
+pollIntervalSeconds: 30
+## Size of the sliding window of offsets to keep in each partition's lookup table
+lookupTableSize: 60
+## The Consumer Group `group.id` to use when connecting to Kafka
+clientGroupId: "kafkalagexporter"
+## The timeout when communicating with Kafka clusters
+kafkaClientTimeoutSeconds: 10
+## Watchers will automatically discover and forget Kafka clusters
+watchers:
+  ## The Strimzi Cluster Watcher automatically watches for `kafka.strimzi.io` group, `Kafka` kind resources and will
+  ## configure the Kafka Lag Exporter appropriately.
+  strimzi: true
+## Applicable only in non-Strimzi installation. If true, a service account will be created and bind to the deployment.
+## Otherwise, the default service account for the namespace will be used.
+serviceAccount:
+  create: false
+  ## The name of the service account will be generated based on the release name, use nameOverride to override
+  ## with a static name.
+  # nameOverride: my-serviceaccount
+
+## You can use regex to control the metrics exposed by Prometheus endpoint.
+## Any metric that matches one of the regex in the whitelist will be exposed.
+## For example, if you only wish to expose the max lag metrics, use either:
+## metricWhitelist:
+##   - ^kafka_consumergroup_group_max_lag.*
+##
+## Or
+##
+## metricWhitelist:
+##   - kafka_consumergroup_group_max_lag
+##   - kafka_consumergroup_group_max_lag_seconds
+metricWhitelist:
+  - .*
+
+## The log level of the ROOT logger
+rootLogLevel: INFO
+## The log level of Kafka Lag Exporter
+kafkaLagExporterLogLevel: INFO
+## The log level of `org.apache.kafka` logger
+kafkaLogLevel: INFO
+## The log level of Akka
+akkaLogLevel: DEBUG
+
+## You probably won't need to change anything below this line.
+image:
+  repository: lightbend/kafka-lag-exporter
+  tag: 0.6.3
+  # If digest is set it will be used instead of tag to specify the image
+  # digest: sha256:0f6387aa011e6eb7952ea211ac139bf8613ad3ef6954a1a5d910676d293bd610
+  pullPolicy: Always
+securityContext: {}
+  # allowPrivilegeEscalation: false
+  # runAsUser: 1001
+  # runAsNonRoot: true
+  # capabilities:
+  #   drop: ["all"]
+initContainers: []
+## Init containers to be added to the pod.
+# - name: my-init-container
+#   image: busybox:latest
+#   command: ['sh', '-c', 'echo hello']
+service:
+  type: ClusterIP
+  port: 8000
+resources: {}
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+nodeSelector: {}
+tolerations: []
+affinity: {}
+extraConfigmapMounts: []
+  # - name: cacerts
+  #   configMap: cacerts-configmap
+  #   mountPath: /etc/pki/ca-trust/extracted/java/cacerts
+  #   subPath: ca-bundle.jks
+  #   readOnly: true
+extraMounts: []
+  # - name: my-secrets
+  #   mount:
+  #     emptyDir:
+  #       medium: Memory
+  #   mountPath: /var/run/my-secrets
+env: {}
+  # - name: JAVA_OPTS
+  #   value: "-Djava.security.auth.login.config=/var/run/my-secrets/jaasConfig"
+podAnnotations: {}
+  # foo: bar
+## Readiness and liveness probe initial delay and timeout
+## Ref: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+readinessProbeInitialDelay: 30
+readinessProbePeriodSeconds: 5
+readinessProbeTimeout: 30
+readinessProbeFailureThreshold: 3
+readinessProbeSuccessThreshold: 1
+livenessProbeInitialDelay: 30
+livenessProbePeriodSeconds: 15
+livenessProbeTimeout: 30
+livenessProbeFailureThreshold: 3
+livenessProbeSuccessThreshold: 1
+
+prometheus:
+  serviceMonitor:
+    enabled: false
+    interval: "30s"
+    # service monitor label selectors: https://github.com/helm/charts/blob/f5a751f174263971fafd21eee4e35416d6612a3d/stable/prometheus-operator/templates/prometheus/prometheus.yaml#L74
+    # additionalLabels:
+    #   prometheus: k8s

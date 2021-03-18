@@ -1,0 +1,224 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connection with Azure Blob Storage &#8212; xml-reader-producer 1.0.6 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Connection with Kafka Broker" href="kafka.html" />
+    <link rel="prev" title="Datastores" href="datastores.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="kafka.html" title="Connection with Kafka Broker"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="datastores.html" title="Datastores"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">xml-reader-producer 1.0.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="datastores.html" accesskey="U">Datastores</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Connection with Azure Blob Storage</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="connection-with-azure-blob-storage">
+<h1>Connection with Azure Blob Storage<a class="headerlink" href="#connection-with-azure-blob-storage" title="Permalink to this headline">¶</a></h1>
+<p>This is the module responsible for communicating with Azure Blobstorage
+You can read the files in the containers and make the separation of valid files.
+Valids will be suitable for processing and invalids will quarantine.</p>
+<div class="section" id="module-datastores.blob_storage.read_blob_files">
+<span id="reading-the-files"></span><h2>Reading the files<a class="headerlink" href="#module-datastores.blob_storage.read_blob_files" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">datastores.blob_storage.read_blob_files.</span></code><code class="sig-name descname"><span class="pre">BlobStorage</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">blob_storage_conn_str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container_base</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container_processed</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">container_quarantined</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage" title="Permalink to this definition">¶</a></dt>
+<dd><p>A class that allows you to connect to Azure Blob Storage</p>
+<p>With this class it will be possible to identify the metadata of the files,
+copy the files between the containers, delete the files and process the files
+present in the container</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>blob_storage_conn_str</strong> (<em>str</em>) – Connection string with Blob Storage.</p></li>
+<li><p><strong>container_base</strong> (<em>str</em>) – Container where files will be read.</p></li>
+<li><p><strong>container_processed</strong> (<em>str</em>) – Container where files will be sent after being processed.</p></li>
+<li><p><strong>container_quarantined</strong> (<em>str</em>) – Container that stores quarantine files.</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage.copy_blob_files">
+<code class="sig-name descname"><span class="pre">copy_blob_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage.copy_blob_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Copies the file from one container to the other.</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – File to be copied.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage.delete_blob_files">
+<code class="sig-name descname"><span class="pre">delete_blob_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file_name</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage.delete_blob_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Deletes the file from a container.
+Used to clean the source location and reduce space usage</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>file_name</strong> (<em>str</em>) – File to be deleted.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage.get_file_metadata_info">
+<code class="sig-name descname"><span class="pre">get_file_metadata_info</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage.get_file_metadata_info" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the metadata of files in a container.</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p><strong>dict_metadata</strong> – A list that contains the metadata for all files in the container.</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage.process_blob_files">
+<code class="sig-name descname"><span class="pre">process_blob_files</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage.process_blob_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Process files within a container.</p>
+<p>Processing takes place in 3 steps:</p>
+<ul class="simple">
+<li><p>Treatment and data ingestion in Kafka topics (CFE data and your items).</p></li>
+<li><p>Moves processed files to the successfully processed container.</p></li>
+<li><p>Retrieve information to share with the metadata repository (Postgres).</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt id="datastores.blob_storage.read_blob_files.BlobStorage.utc_to_local">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">utc_to_local</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">utc_dt</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.read_blob_files.BlobStorage.utc_to_local" title="Permalink to this definition">¶</a></dt>
+<dd><p>Converts the utc time to the location</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>utc_dt</strong> (<em>datetime</em>) – A datetime containing the value to be converted.</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>A datetime containing the converted value.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>datetime</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-datastores.blob_storage.validate_file_type">
+<span id="validating-the-files"></span><h2>Validating the files<a class="headerlink" href="#module-datastores.blob_storage.validate_file_type" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="datastores.blob_storage.validate_file_type.StorageFileTypeValidator">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">datastores.blob_storage.validate_file_type.</span></code><code class="sig-name descname"><span class="pre">StorageFileTypeValidator</span></code><a class="headerlink" href="#datastores.blob_storage.validate_file_type.StorageFileTypeValidator" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that validates the files present in the read container.</p>
+<div class="line-block">
+<div class="line">Validation takes place in 3 steps:</div>
+<div class="line">- The contents of the files present in the container are read.</div>
+<div class="line">- Identified the file type by the root node of the XML file.</div>
+<div class="line">- If the file is not of the CFE type, it will be sent to the “quarantine” container, where it will be analyzed later.</div>
+</div>
+<dl class="py method">
+<dt id="datastores.blob_storage.validate_file_type.StorageFileTypeValidator.run">
+<code class="sig-name descname"><span class="pre">run</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#datastores.blob_storage.validate_file_type.StorageFileTypeValidator.run" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the file validation process.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Connection with Azure Blob Storage</a><ul>
+<li><a class="reference internal" href="#module-datastores.blob_storage.read_blob_files">Reading the files</a></li>
+<li><a class="reference internal" href="#module-datastores.blob_storage.validate_file_type">Validating the files</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+      <li><a href="datastores.html">Datastores</a>
+        <ul>
+          <li>Previous: <a href="datastores.html" title="previous chapter">Datastores</a>
+          <li>Next: <a href="kafka.html" title="next chapter">Connection with Kafka Broker</a></ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Luan Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

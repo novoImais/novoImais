@@ -1,0 +1,27 @@
+apiVersion: "kafka.strimzi.io/v1alpha1"
+kind: "KafkaConnector"
+metadata:
+  # connector name
+  name: "sink-yugabytedb-ysql-enriched-nfe-avro-bbac145d"
+  labels:
+    # kafka connect [cluster] name
+    strimzi.io/cluster: edh
+spec:
+  class: io.confluent.connect.jdbc.JdbcSinkConnector
+  tasksMax: 2
+  config:
+    key.converter: "org.apache.kafka.connect.storage.StringConverter"
+    value.converter: "io.confluent.connect.avro.AvroConverter"
+    value.converter.schema.registry.url: "http://schema-registry-cp-schema-registry:8081"
+    key.converter.schemas.enable: "false"
+    value.converter.schemas.enable: "true"
+    connection.url: "jdbc:postgresql://yb-tservers.database.svc.cluster.local:5433/martins?user=yugabyte&password=yugabyte"
+    connection.attempts: "2"
+    topics: "ksqldb-stream-nfe-avro"
+    table.name.format: "enriched_nfe"
+    auto.create: "true"
+    auto.evolve: "true"
+    insert.mode: "insert"
+    pk.mode: "none"
+    pk.fields: "none"
+    batch.size: "3000"

@@ -1,0 +1,8 @@
+# https://strimzi.io/blog/2020/06/15/cruise-control/
+apiVersion: kafka.strimzi.io/v1alpha1
+kind: KafkaRebalance
+metadata:
+  name: edh-kafka-rebalance
+  labels:
+    strimzi.io/cluster: edh
+spec: {}

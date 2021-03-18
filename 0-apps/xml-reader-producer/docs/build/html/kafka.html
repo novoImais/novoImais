@@ -1,0 +1,220 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Connection with Kafka Broker &#8212; xml-reader-producer 1.0.6 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="Connection with Azure Blob Storage" href="blob_storage.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="blob_storage.html" title="Connection with Azure Blob Storage"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">xml-reader-producer 1.0.6 documentation</a> &#187;</li>
+          <li class="nav-item nav-item-1"><a href="datastores.html" accesskey="U">Datastores</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Connection with Kafka Broker</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="connection-with-kafka-broker">
+<h1>Connection with Kafka Broker<a class="headerlink" href="#connection-with-kafka-broker" title="Permalink to this headline">¶</a></h1>
+<p>This is the module responsible for communicating with kafka broker
+Here are producer settings, the methods used for
+Send CF-e data and its items to their respective topics and
+Because Callback will be registered.</p>
+<div class="section" id="creating-communication-with-kafka">
+<h2>Creating Communication with Kafka<a class="headerlink" href="#creating-communication-with-kafka" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-datastores.kafka.producer_settings">
+<span id="kafka-producer-settings"></span><h3>Kafka Producer Settings<a class="headerlink" href="#module-datastores.kafka.producer_settings" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="datastores.kafka.producer_settings.producer_settings_json">
+<code class="sig-prename descclassname"><span class="pre">datastores.kafka.producer_settings.</span></code><code class="sig-name descname"><span class="pre">producer_settings_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">app_name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">broker</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.kafka.producer_settings.producer_settings_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the default settings for a Kafka Producer.</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>app_name</strong> (<em>str</em>) – Name of the application that is sending the information to Kafka.
+This name will be used internally for logs and monitoring.</p></li>
+<li><p><strong>broker</strong> (<em>str</em>) – Name of the Broker to be ingested by the producer.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p><strong>settings</strong> – A dictionary with the settings to be used by the producer.</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>dict</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-datastores.kafka.delivery_reports">
+<span id="registering-callbacks"></span><h3>Registering Callbacks<a class="headerlink" href="#module-datastores.kafka.delivery_reports" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="datastores.kafka.delivery_reports.on_delivery_json">
+<code class="sig-prename descclassname"><span class="pre">datastores.kafka.delivery_reports.</span></code><code class="sig-name descname"><span class="pre">on_delivery_json</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">err</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">msg</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.kafka.delivery_reports.on_delivery_json" title="Permalink to this definition">¶</a></dt>
+<dd><p>Method used to log ingestion callbacks in Kafka</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>err</strong> (<em>str</em>) – String with error information, if any.</p></li>
+<li><p><strong>msg</strong> (<em>obj</em>) – Object with the information from where the message was saved.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+<div class="section" id="feeding-topics">
+<h2>Feeding Topics<a class="headerlink" href="#feeding-topics" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-datastores.kafka.json.cfe_json_producer">
+<span id="cf-e-topics"></span><h3>CF-E Topics<a class="headerlink" href="#module-datastores.kafka.json.cfe_json_producer" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="datastores.kafka.json.cfe_json_producer.cfe_json_producer">
+<code class="sig-prename descclassname"><span class="pre">datastores.kafka.json.cfe_json_producer.</span></code><code class="sig-name descname"><span class="pre">cfe_json_producer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.kafka.json.cfe_json_producer.cfe_json_producer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs xml/event decomposition in Kafka topics.</p>
+<div class="line-block">
+<div class="line">The following topics are fed by this routine:</div>
+<div class="line">- Ide_Json: CF-e identification information group</div>
+<div class="line">- Emit_Json: CF-e issuer identification group</div>
+<div class="line">- Dest_Json: Identification group of the recipient of the CF-e</div>
+<div class="line">- Det_Json: Products and Services detailing group of CF-e</div>
+<div class="line">- Total_Json: CF-e Total Values Group</div>
+<div class="line">- Pgto_Json: CFe Payment Information Group</div>
+<div class="line">- Inf_Adic_Json: Additional Information Group</div>
+</div>
+<div class="line-block">
+<div class="line">The routine happens in 3 steps:</div>
+<div class="line">- Creation of KafkaProducer</div>
+<div class="line">- XML decomposition</div>
+<div class="line">- Sending events to Kafka</div>
+</div>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xml</strong> (<em>str</em>) – XML string to be decomposed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<div class="section" id="module-datastores.kafka.json.cfe_items_json_producer">
+<span id="items-topic"></span><h3>Items topic<a class="headerlink" href="#module-datastores.kafka.json.cfe_items_json_producer" title="Permalink to this headline">¶</a></h3>
+<dl class="py function">
+<dt id="datastores.kafka.json.cfe_items_json_producer.cfe_items_json_producer">
+<code class="sig-prename descclassname"><span class="pre">datastores.kafka.json.cfe_items_json_producer.</span></code><code class="sig-name descname"><span class="pre">cfe_items_json_producer</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">xml</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#datastores.kafka.json.cfe_items_json_producer.cfe_items_json_producer" title="Permalink to this definition">¶</a></dt>
+<dd><p>Performs the sending of items (Tag Det) from xml to Kafka.</p>
+<div class="line-block">
+<div class="line">The following topics are fed by this routine:</div>
+<div class="line">- Items_Json: Product and Service Detailing Group of CF-e</div>
+</div>
+<div class="line-block">
+<div class="line">The routine happens in 3 steps:</div>
+<div class="line">- Creation of KafkaProducer</div>
+<div class="line">- XML decomposition, searching for items in CF-e</div>
+<div class="line">- Sending events to Kafka</div>
+</div>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>xml</strong> (<em>str</em>) – XML string to be decomposed</p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Connection with Kafka Broker</a><ul>
+<li><a class="reference internal" href="#creating-communication-with-kafka">Creating Communication with Kafka</a><ul>
+<li><a class="reference internal" href="#module-datastores.kafka.producer_settings">Kafka Producer Settings</a></li>
+<li><a class="reference internal" href="#module-datastores.kafka.delivery_reports">Registering Callbacks</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#feeding-topics">Feeding Topics</a><ul>
+<li><a class="reference internal" href="#module-datastores.kafka.json.cfe_json_producer">CF-E Topics</a></li>
+<li><a class="reference internal" href="#module-datastores.kafka.json.cfe_items_json_producer">Items topic</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+      <li><a href="datastores.html">Datastores</a>
+        <ul>
+          <li>Previous: <a href="blob_storage.html" title="previous chapter">Connection with Azure Blob Storage</a>
+          </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Luan Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

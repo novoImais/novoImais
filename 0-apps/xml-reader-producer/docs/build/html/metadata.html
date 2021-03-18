@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Metadata &#8212; xml-reader-producer 1.0.6 documentation</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/flask.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Datastores" href="datastores.html" />
+    <link rel="prev" title="Objects" href="objects.html" />
+  <script>DOCUMENTATION_OPTIONS.URL_ROOT = './';</script>
+   
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="datastores.html" title="Datastores"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="objects.html" title="Objects"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">xml-reader-producer 1.0.6 documentation</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Metadata</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="metadata">
+<h1>Metadata<a class="headerlink" href="#metadata" title="Permalink to this headline">¶</a></h1>
+<p>With this module, you can perform the database settings.
+We are using Postgres.</p>
+<div class="section" id="module-metadata.postgres">
+<span id="communication-class-with-the-database"></span><h2>Communication class with the database<a class="headerlink" href="#module-metadata.postgres" title="Permalink to this headline">¶</a></h2>
+<dl class="py class">
+<dt id="metadata.postgres.Postgres">
+<em class="property"><span class="pre">class</span> </em><code class="sig-prename descclassname"><span class="pre">metadata.postgres.</span></code><code class="sig-name descname"><span class="pre">Postgres</span></code><a class="headerlink" href="#metadata.postgres.Postgres" title="Permalink to this definition">¶</a></dt>
+<dd><p>Class that allows you to connect to the Postgres database.</p>
+<dl class="simple">
+<dt>With this class you can:</dt><dd><ul class="simple">
+<li><p>Create the database in the instance of Postgres.</p></li>
+<li><p>Create the table where processing logs will be saved (processed_files).</p></li>
+<li><p>Inserts the metadata records from the files in the database</p></li>
+</ul>
+</dd>
+</dl>
+<dl class="py method">
+<dt id="metadata.postgres.Postgres.create_database">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">create_database</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#metadata.postgres.Postgres.create_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the database in the instance of Postgres.</p>
+<p>Using the information contained in the environment variables,
+the create or recreates the database method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="metadata.postgres.Postgres.create_tables">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">create_tables</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#metadata.postgres.Postgres.create_tables" title="Permalink to this definition">¶</a></dt>
+<dd><p>Create the table where processing logs will be saved (processed_files).</p>
+<p>Using the information of the environment variables to connect to the database,
+create or re-create the “processed_files” table</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="metadata.postgres.Postgres.insert_rows_metadata_processed_files">
+<em class="property"><span class="pre">static</span> </em><code class="sig-name descname"><span class="pre">insert_rows_metadata_processed_files</span></code><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rows</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#metadata.postgres.Postgres.insert_rows_metadata_processed_files" title="Permalink to this definition">¶</a></dt>
+<dd><p>Inserts the metadata records from the files in the database</p>
+<p>Using the information of the environment variables to connect to the database
+and the data sent by parameter, the method inserts the file metadata in the database</p>
+<p>…</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>rows</strong> (<em>dict</em>) – Records to be entered in the database.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-metadata.create_env">
+<span id="configuring-the-database"></span><h2>Configuring the database<a class="headerlink" href="#module-metadata.create_env" title="Permalink to this headline">¶</a></h2>
+<dl class="py function">
+<dt id="metadata.create_env.create_database">
+<code class="sig-prename descclassname"><span class="pre">metadata.create_env.</span></code><code class="sig-name descname"><span class="pre">create_database</span></code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#metadata.create_env.create_database" title="Permalink to this definition">¶</a></dt>
+<dd><p>This method will create the database and the table where the logs will be registered</p>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+  <span id="sidebar-top"></span>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  
+    
+  
+
+  <h3>Contents</h3>
+  <ul>
+<li><a class="reference internal" href="#">Metadata</a><ul>
+<li><a class="reference internal" href="#module-metadata.postgres">Communication class with the database</a></li>
+<li><a class="reference internal" href="#module-metadata.create_env">Configuring the database</a></li>
+</ul>
+</li>
+</ul>
+<h3>Navigation</h3>
+<ul>
+  <li><a href="index.html">Overview</a>
+    <ul>
+          <li>Previous: <a href="objects.html" title="previous chapter">Objects</a>
+          <li>Next: <a href="datastores.html" title="next chapter">Datastores</a>
+    </ul>
+  </li>
+</ul>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2021, Luan Moreno.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.5.2.
+    </div>
+  <script src="_static/version_warning_offset.js"></script>
+
+  </body>
+</html>

@@ -1,0 +1,28 @@
+curl -X PUT http://localhost:9200/_ilm/policy/filebeat -H 'Content-Type: application/json' -d'
+{
+  "policy": {
+    "phases": {
+      "hot": {
+        "min_age": "0ms",
+        "actions": {
+          "rollover": {
+            "max_age": "15d",
+            "max_size": "10gb"
+          },
+          "set_priority": {
+            "priority": null
+          }
+        }
+      },
+      "delete": {
+        "min_age": "15d",
+        "actions": {
+          "delete": {
+            "delete_searchable_snapshot": true
+          }
+        }
+      }
+    }
+  }
+}
+'

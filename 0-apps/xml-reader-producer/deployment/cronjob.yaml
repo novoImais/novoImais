@@ -1,0 +1,25 @@
+apiVersion: batch/v1beta1
+# scheduler type
+kind: CronJob
+metadata:
+  # name of the metadata
+  name: cj-python-events-imais-json
+spec:
+  # at every 15 minutes
+  schedule: "*/15 * * * *"
+  # stop another job to run
+  # at the same time of another
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          # name of the container
+          # image from container registry
+          - name: python-events-imais-json
+            image: owshq/python-events-imais-json:0.5
+            imagePullPolicy: IfNotPresent
+          restartPolicy: OnFailure
+
+

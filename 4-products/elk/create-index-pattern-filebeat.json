@@ -1,0 +1,1 @@
+curl --fail --user httpuser:httppass --request POST --header 'Content-Type: application/json' --header 'kbn-xsrf: this_is_required_header' 'http://localhost:5601/api/saved_objects/index-pattern/filebeat-*?overwrite=true' --data '{"attributes":{"title":"filebeat-*","timeFieldName":"@timestamp"}}' 'http://localhost:5601/api/saved_objects/index-pattern/filebeat-*?overwrite=true'
