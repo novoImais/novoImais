@@ -81,3 +81,15 @@ class NFeEvents(object):
     def get_total(self):
         """Returns TAG Total of NF-e."""
         return self.root_nfe["infNfe"]["total"]
+
+    def get_transp(self):
+        """Returns TAG transp of NF-e."""
+        return self.root_nfe["infNfe"]["transp"]
+
+    def get_pag(self):
+        """Returns TAG pag of NF-e."""
+        return self.root_nfe["infNfe"]["pag"]
+
+    def get_infAdic(self):
+        """Returns TAG infAdic of NF-e."""
+        return self.root_nfe["infNfe"]["infAdic"]
