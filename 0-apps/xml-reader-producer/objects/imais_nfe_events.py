@@ -62,34 +62,34 @@ class NFeEvents(object):
         # return in json format
         return xml2json
 
-    def get_key(self):
+    def get_nfe_key(self):
         """Returns the CF-E key."""
         return self.key
 
-    def get_ide(self):
+    def get_nfe_ide(self):
         """Returns NF-E identification information group."""
         return self.root_nfe["infNFe"]["ide"]
 
-    def get_emit(self):
+    def get_nfe_emit(self):
         """Returns NF-e issuer identification group."""
         return self.root_nfe["infNFe"]["emit"]
 
-    def get_det(self):
+    def get_nfe_det(self):
         """Returns TAG det of NF-e."""
         return self.root_nfe["infNfe"]["det"]
 
-    def get_total(self):
+    def get_nfe_total(self):
         """Returns TAG Total of NF-e."""
         return self.root_nfe["infNfe"]["total"]
 
-    def get_transp(self):
+    def get_nfe_transp(self):
         """Returns TAG transp of NF-e."""
         return self.root_nfe["infNfe"]["transp"]
 
-    def get_pag(self):
+    def get_nfe_pag(self):
         """Returns TAG pag of NF-e."""
         return self.root_nfe["infNfe"]["pag"]
 
-    def get_infAdic(self):
+    def get_nfe_infAdic(self):
         """Returns TAG infAdic of NF-e."""
         return self.root_nfe["infNfe"]["infAdic"]
