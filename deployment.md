@@ -82,7 +82,8 @@ k create clusterrolebinding cluster-admin-binding --clusterrole=cluster-admin --
 argocd cluster add $ORION_CLUSTER --port-forward --in-cluster
 
 # add repo into argo-cd repositories
-argocd repo add $REPOSITORY --username gitusers --password gitpassword --port-forward
+#argocd repo add $REPOSITORY --username gitusers --password gitpassword --port-forward
+argocd repo add https://github.com/novoImais/novoImais --username jorge.euripedes@martins.com.br --password n4g4z4k1 --port-forward
 ```
 
 ### install apps [orion]

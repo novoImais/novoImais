@@ -1,6 +1,6 @@
 import os
 import json
-from objects.imais_nfe_events import Events
+from objects.imais_nfe_events import NFeEvents
 from dotenv import load_dotenv
 from datastores.kafka import delivery_reports, producer_settings
 from confluent_kafka import Producer

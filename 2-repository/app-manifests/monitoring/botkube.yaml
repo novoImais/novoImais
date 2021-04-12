@@ -8,7 +8,8 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://bitbucket.org/owshq/martins.git'
+    reporURL : 'https://github.com/novoImais/novoImais'
+    #repoURL: 'https://bitbucket.org/owshq/martins.git'
     path: 2-repository/helm-charts/botkube
     targetRevision: HEAD
     helm:
