@@ -93,3 +93,7 @@ class NFeEvents(object):
     def get_nfe_infAdic(self):
         """Returns TAG infAdic of NF-e."""
         return self.root_nfe["infNfe"]["infAdic"]
+
+    def get_nfe_dest(self):
+        """Returns NF-e issuer identification group."""
+        return self.root_nfe["infNFe"]["dest"]
