@@ -57,14 +57,14 @@ def cfe_json_producer(xml):
 
         # get object [dict] from objects
         # calling different functions
-        data_ide = NFeEvents(xml).get_nfe_ide()
-        data_emit = NFeEvents(xml).get_nfe_emit()
-        data_dest = NFeEvents(xml).get_nfe_dest()
-        data_det = NFeEvents(xml).get_nfe_det()
-        data_total = NFeEvents(xml).get_nfe_total()
-        data_transp = NFeEvents(xml).get_nfe_transp()
-        data_pgto = NFeEvents(xml).get_nfe_pgto()
-        data_inf_adic = NFeEvents(xml).get_nfe_inf_adic()
+        data_ide = NFCeEvents(xml).get_nfe_ide()
+        data_emit = NFCeEvents(xml).get_nfe_emit()
+        data_dest = NFCeEvents(xml).get_nfe_dest()
+        data_det = NFCeEvents(xml).get_nfe_det()
+        data_total = NFCeEvents(xml).get_nfe_total()
+        data_transp = NFCeEvents(xml).get_nfe_transp()
+        data_pgto = NFCeEvents(xml).get_nfe_pgto()
+        data_inf_adic = NFCeEvents(xml).get_nfe_inf_adic()
 
         # try to ingest events
         try:
@@ -74,7 +74,7 @@ def cfe_json_producer(xml):
             # event = [ide]
             p.produce(
                 topic=topic_nfe_ide_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_ide).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -82,7 +82,7 @@ def cfe_json_producer(xml):
             # event = [emit]
             p.produce(
                 topic=topic_nfe_emit_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_emit).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -90,7 +90,7 @@ def cfe_json_producer(xml):
             # event = [dest]
             p.produce(
                 topic=topic_nfe_dest_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_dest).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -98,7 +98,7 @@ def cfe_json_producer(xml):
             # event = [det]
             p.produce(
                 topic=topic_nfe_det_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_det).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -106,7 +106,7 @@ def cfe_json_producer(xml):
             # event = [total]
             p.produce(
                 topic=topic_nfe_total_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_total).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -114,7 +114,7 @@ def cfe_json_producer(xml):
             # event = [transp]
             p.produce(
                 topic=topic_nfe_transp_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_transp).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -122,7 +122,7 @@ def cfe_json_producer(xml):
             # event = [pgto]
             p.produce(
                 topic=topic_nfe_pgto_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_pgto).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -130,7 +130,7 @@ def cfe_json_producer(xml):
             # event = [inf_adic]
             p.produce(
                 topic=topic_nfe_inf_adic_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_inf_adic).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
