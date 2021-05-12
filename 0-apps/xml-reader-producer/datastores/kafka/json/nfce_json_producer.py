@@ -12,14 +12,14 @@ app_name = os.getenv("KAFKA_CLIENT_ID_JSON")
 broker = os.getenv("KAFKA_BOOTSTRAP_SERVER")
 
 # topics
-topic_nfe_ide_json = os.getenv("KAFKA_TOPIC_NFE_IDE_JSON")
-topic_nfe_emit_json = os.getenv("KAFKA_TOPIC_NFE_EMIT_JSON")
-topic_nfe_dest_json = os.getenv("KAFKA_TOPIC_NFE_DEST_JSON")
-topic_nfe_det_json = os.getenv("KAFKA_TOPIC_NFE_DET_JSON")
-topic_nfe_total_json = os.getenv("KAFKA_TOPIC_NFE_TOTAL_JSON")
-topic_nfe_transp_json = os.getenv("KAFKA_TOPIC_NFE_TRANSP_JSON")
-topic_nfe_pgto_json = os.getenv("KAFKA_TOPIC_NFE_PGTO_JSON")
-topic_nfe_inf_adic_json = os.getenv("KAFKA_TOPIC_NFE_INF_ADIC_JSON")
+topic_nfce_ide_json = os.getenv("KAFKA_TOPIC_NFCE_IDE_JSON")
+topic_nfce_emit_json = os.getenv("KAFKA_TOPIC_NFCE_EMIT_JSON")
+topic_nfce_dest_json = os.getenv("KAFKA_TOPIC_NFCE_DEST_JSON")
+topic_nfce_det_json = os.getenv("KAFKA_TOPIC_NFCE_DET_JSON")
+topic_nfce_total_json = os.getenv("KAFKA_TOPIC_NFCE_TOTAL_JSON")
+topic_nfce_transp_json = os.getenv("KAFKA_TOPIC_NFCE_TRANSP_JSON")
+topic_nfce_pgto_json = os.getenv("KAFKA_TOPIC_NFCE_PGTO_JSON")
+topic_nfce_inf_adic_json = os.getenv("KAFKA_TOPIC_NFCE_INF_ADIC_JSON")
 
 
 def cfe_json_producer(xml):
@@ -73,7 +73,7 @@ def cfe_json_producer(xml):
 
             # event = [ide]
             p.produce(
-                topic=topic_nfe_ide_json,
+                topic=topic_nfce_ide_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_ide).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -81,7 +81,7 @@ def cfe_json_producer(xml):
 
             # event = [emit]
             p.produce(
-                topic=topic_nfe_emit_json,
+                topic=topic_nfce_emit_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_emit).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -89,7 +89,7 @@ def cfe_json_producer(xml):
 
             # event = [dest]
             p.produce(
-                topic=topic_nfe_dest_json,
+                topic=topic_nfce_dest_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_dest).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -97,7 +97,7 @@ def cfe_json_producer(xml):
 
             # event = [det]
             p.produce(
-                topic=topic_nfe_det_json,
+                topic=topic_nfce_det_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_det).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -105,7 +105,7 @@ def cfe_json_producer(xml):
 
             # event = [total]
             p.produce(
-                topic=topic_nfe_total_json,
+                topic=topic_nfce_total_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_total).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -113,7 +113,7 @@ def cfe_json_producer(xml):
 
             # event = [transp]
             p.produce(
-                topic=topic_nfe_transp_json,
+                topic=topic_nfce_transp_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_transp).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -121,7 +121,7 @@ def cfe_json_producer(xml):
 
             # event = [pgto]
             p.produce(
-                topic=topic_nfe_pgto_json,
+                topic=topic_nfce_pgto_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_pgto).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
@@ -129,7 +129,7 @@ def cfe_json_producer(xml):
 
             # event = [inf_adic]
             p.produce(
-                topic=topic_nfe_inf_adic_json,
+                topic=topic_nfce_inf_adic_json,
                 key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_inf_adic).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,

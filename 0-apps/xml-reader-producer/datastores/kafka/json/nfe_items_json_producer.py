@@ -12,7 +12,7 @@ app_name = os.getenv("KAFKA_CLIENT_ID_JSON")
 broker = os.getenv("KAFKA_BOOTSTRAP_SERVER")
 
 # topics
-topic_items_json = os.getenv("KAFKA_TOPIC_ITEMS_JSON")
+topic_items_json = os.getenv("KAFKA_TOPIC_NFE_ITEMS_JSON")
 
 
 def nfe_items_json_producer(xml):
