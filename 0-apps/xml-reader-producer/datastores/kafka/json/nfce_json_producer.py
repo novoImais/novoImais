@@ -5,6 +5,11 @@ from dotenv import load_dotenv
 from datastores.kafka import delivery_reports, producer_settings
 from confluent_kafka import Producer
 
+'''
+Teste GitHub Jorge - 24/05
+
+'''
+
 load_dotenv()
 
 # load variables

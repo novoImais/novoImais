@@ -11,6 +11,10 @@ load_dotenv()
 app_name = os.getenv("KAFKA_CLIENT_ID_JSON")
 broker = os.getenv("KAFKA_BOOTSTRAP_SERVER")
 
+'''
+Teste GitHub Jorge - 24/05
+'''
+
 # topics
 topic_items_json = os.getenv("KAFKA_TOPIC_ITEMS_JSON")
 
