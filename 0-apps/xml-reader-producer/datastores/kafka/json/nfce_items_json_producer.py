@@ -1,25 +1,18 @@
 import os
-import os
 import json
-from objects.imais_nfe_events import NFeEvents
+from objects.imais_nfe_events import NFCeEvents
 from dotenv import load_dotenv
 from datastores.kafka import delivery_reports, producer_settings
 from confluent_kafka import Producer
 
-"""
-Teste GitHub Jorge - 24/05 --
-      
-"""
-
 load_dotenv()
-
 
 # load variables
 app_name = os.getenv("KAFKA_CLIENT_ID_JSON")
 broker = os.getenv("KAFKA_BOOTSTRAP_SERVER")
 
 # topics
-topic_items_json = os.getenv("KAFKA_TOPIC_NFE_ITEMS_JSON")
+topic_items_json = os.getenv("KAFKA_TOPIC_NFCE_ITEMS_JSON")
 
 
 def nfe_items_json_producer(xml):
@@ -46,7 +39,7 @@ def nfe_items_json_producer(xml):
     p = Producer(producer_settings.producer_settings_json(app_name, broker))
 
     # get object [dict] from objects
-    data_det = NFeEvents(xml).get_nfe_det()
+    data_det = NFCeEvents(xml).get_nfe_det()
 
     # print(data_det)
     # print(len(data_det))
@@ -74,7 +67,7 @@ def nfe_items_json_producer(xml):
             # event = [ide]
             p.produce(
                 topic=topic_items_json,
-                key=NFeEvents(xml).get_nfe_key(),
+                key=NFCeEvents(xml).get_nfe_key(),
                 value=json.dumps(data_det).encode("utf-8"),
                 callback=delivery_reports.on_delivery_json,
             )
@@ -113,7 +106,7 @@ def nfe_items_json_producer(xml):
                 # event = [ide]
                 p.produce(
                     topic=topic_items_json,
-                    key=NFeEvents(xml).get_nfe_key(),
+                    key=NFCeEvents(xml).get_nfe_key(),
                     value=json.dumps(data_det[inserts]).encode("utf-8"),
                     callback=delivery_reports.on_delivery_json,
                 )
